@@ -1,0 +1,5 @@
+venv/
+.streamlit/
+__pycache__/
+
+mdm4u_credentials.json
