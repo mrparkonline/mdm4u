@@ -1,5 +1,7 @@
+# Directories and Virtual Environments
 venv/
 .streamlit/
 __pycache__/
 
+# Random Files
 mdm4u_credentials.json
