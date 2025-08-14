@@ -42,27 +42,35 @@ st.title("Unit 1 - Data and Statistical Analysis")
 
 # st.write(data)
 counter = 0
+st.subheader("Sub Units:")
 for sub_unit, items in sub_units.items():
-    with st.container(border=True, key=f"sub_unit_{counter}"):
-        st.subheader(f"{sub_unit.split('_')[1]}")
+    #with st.container(border=True, key=f"sub_unit_{counter}"):
+    with st.expander(f"{sub_unit.split('_')[1]}"):
+        #st.subheader(f"{sub_unit.split('_')[1]}")
         for i, lesson_data in enumerate(items):
             with st.container(key=f"sub_unit_{counter}_container_{i}"):
-                st.write(f"**{i+1}: {lesson_data['title']}**")
-                col1, col2, col3, col4 = st.columns(4)
-                with col1:
-                    st.write(f"_{lesson_data['description']}_")
-                with col2:
-                    if len(lesson_data['resource_link']) > 2:
-                        st.write(f"[Resource Link]({lesson_data['resource_link']})")
-                    else:
-                        st.write("No Resource Link")
-                with col3:
-                    if len(lesson_data['youtube']) > 2:
-                        st.write(f"[YouTube Playlist]({lesson_data['youtube']})")
-                    else:
-                        st.write("No YouTube Playlist")
-                with col4:
-                    st.write(f"TB: {lesson_data['tb_pages']}")
+                if 'Review' in lesson_data['title']:
+                    st.write(f"**{lesson_data['title']} Class**")
+                elif 'Quiz' not in lesson_data['title'] and 'Test' not in lesson_data['title'] and 'Assignment' not in lesson_data['title']:
+                    st.write(f"**Lesson: {lesson_data['title']}**")
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        st.write(f"_{lesson_data['description']}_")
+                    with col2:
+                        if len(lesson_data['resource_link']) > 2:
+                            st.write(f"[Resource Link]({lesson_data['resource_link']})")
+                        else:
+                            st.write("_No Resource Link_")
+                    with col3:
+                        if len(lesson_data['youtube']) > 2:
+                            st.write(f"[YouTube Playlist]({lesson_data['youtube']})")
+                        else:
+                            st.write("_No YouTube Playlist_")
+                    with col4:
+                        st.write(f"**TB:** {lesson_data['tb_pages']}")
+                else:
+                    st.badge(f"**{lesson_data['title']}:** _{lesson_data['description']}_", icon=":material/check:", color="green")
+                st.divider()
         # end of inner for
     # end of sub_unit container
     counter += 1
